@@ -16,6 +16,8 @@ const App = () => {
         <Stack.Screen name="Leitura" component={Leitura} />
         <Stack.Screen name="Cadastro" component={Cadastro} />
         <Stack.Screen name="ModoInfantil" component={ModoInfantil} />
+        <Stack.Screen name="ajuda" component={ajuda}/>
+        <Stack.Screen name="ferramentas" component={ferramentas}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -139,18 +141,21 @@ const Menu = () => {
             source={require('./png/video.png')}
           />
           </TouchableOpacity>
-
+          <TouchableOpacity onPress={() => navigation.navigate('ferramentas')}>
           <Image style={styles.atividades2}
             source={require('./png/ferramentas.png')}
           />
+          </TouchableOpacity>
         <TouchableOpacity onPress={handleNavigateModoInfantil}>
           <Image  style={styles.atividades3}
             source={require('./png/infantil.png')}
           />
                 </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.navigate('ajuda')}>
           <Image style={styles.atividades4}
             source={require('./png/ajuda.png')}
           />
+          </TouchableOpacity>
 
         <Text style={styles.textotela2}>Quer ter acesso a nossos recursos exclusivos em primeira mão? Clique aqui</Text>
       </View>
@@ -337,6 +342,38 @@ const ModoInfantil = ({ navigation }) => {
   
   )
 };
+
+const ajuda = () => {
+  const navigation = useNavigation();
+
+  return (
+   <ImageBackground
+      source={{ uri: 'https://i.ibb.co/d4Njymg/infantilbackground.png' }}
+      style={styles.infantilbackground}
+    >
+    <View>
+    
+    </View>
+    </ImageBackground>
+  );
+};
+
+const ferramentas = () => {
+  const navigation = useNavigation();
+
+  return (
+    <ImageBackground
+      source={{ uri: 'https://i.ibb.co/d4Njymg/infantilbackground.png' }}
+      style={styles.infantilbackground}
+    >
+    <View>
+    
+    </View>
+    </ImageBackground>
+  );
+};
+
+
 
 const styles = StyleSheet.create({
 
