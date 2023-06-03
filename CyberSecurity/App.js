@@ -206,7 +206,6 @@ const Leitura = () => {
 };
 
 const Cadastro = () => {
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -215,15 +214,16 @@ const Cadastro = () => {
     console.log('Nome:', name);
     console.log('E-mail:', email);
     console.log('Senha:', password);
-    if (name === '' & email === '' & password === ''){
-    Alert.alert('Oops... Algo está faltando =(');
-  } else {
-    Alert.alert('Cadastro concluído com sucesso.');
-    navigation.navigate('Menu'); 
 
-  }
-  
-};
+    if (name === '' || email === '' || password === '') {
+      Alert.alert('Oops... Algo está faltando =(');
+    } else if (password.length > 8) {
+      Alert.alert('Oops... A senha deve ter no máximo 8 caracteres.');
+    } else {
+      Alert.alert('Cadastro concluído com sucesso.');
+      navigation.navigate('Menu');
+    }
+  };
 
   const [gender, setGender] = useState('');
 
