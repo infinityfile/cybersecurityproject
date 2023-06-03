@@ -41,11 +41,11 @@ const Login = () => {
     navigation.navigate('Cadastro');
   };
 
-  const handleNavigateToImage = () => {
-  const videoImage = 'https://www.google.com/';
-    Linking.openURL(videoImage)
+  const handleNavigateTorickroll = () => {
+    const videoURL = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyc';
+    Linking.openURL(videoURL)
       .catch(() => {
-        console.log('Não foi possível abrir o link. Tente novamente mais tarde.');
+        console.log('Falha ao tentar carregar o vídeo');
       });
   };
 
@@ -94,14 +94,12 @@ const Login = () => {
           </View>
           
         </View>
-
-      <View style={styles.google} TouchableOpacity onPress={handleNavigateToImage}>
+        <TouchableOpacity onPress={handleNavigateTorickroll}>
         <Image
           source={require('./png/Sign_in_with_Google_Button-removebg-preview.png')}
           style={styles.image}
         />
-      </View>
-
+        </TouchableOpacity>
         <Image source={require('./png/image.png')} style={styles.image2} />
       </View>
 
@@ -162,6 +160,8 @@ const Menu = () => {
     </ImageBackground>
   );
 };
+
+
 const Leitura = () => {
 	const handleNavigateToVideo = () => {
     const videoURL = 'https://www.youtube.com/watch?v=DuoCd7UEkpc';
