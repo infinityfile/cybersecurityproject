@@ -405,7 +405,7 @@ const styles = StyleSheet.create({
   },
 
   genderButton: {
-    backgroundColor: '#E0E0E0',
+    backgroundColor: '#4A4548',
     borderRadius: 10,
     padding: 10,
     flex: 1,
@@ -420,7 +420,7 @@ const styles = StyleSheet.create({
     textDecorationColor: 'white',
     color: 'white',
     fontSize: 16,
-    marginTop: 10,
+    marginTop: 15,
     textAlign: 'center',
     fontWeight: 'bold',
   },
@@ -429,6 +429,7 @@ const styles = StyleSheet.create({
     fontFamily: 'UbuntuMedium',
     color: 'white',
     fontSize: 30,
+    marginTop: 15,
     marginBottom: 7,
     marginLeft: 3,
     marginRight: 60,
