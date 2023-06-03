@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, ImageBackground, Image, Alert, TouchableOpacity } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Linking } from 'react-native';
+
 
 const Stack = createStackNavigator();
 
@@ -10,8 +12,10 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Inicio" component={Inicio} />
+        <Stack.Screen name="Menu" component={Menu} />
         <Stack.Screen name="Leitura" component={Leitura} />
+        <Stack.Screen name="Cadastro" component={Cadastro} />
+        <Stack.Screen name="ModoInfantil" component={ModoInfantil} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -23,12 +27,24 @@ const Login = () => {
   const navigation = useNavigation();
 
   const handleLogin = () => {
-    if (username === 'admin' && password === 'admin') {
+    if (username === 'Admin' && password === 'admin') {
       Alert.alert('Login efetuado com sucesso');
-      navigation.navigate('Inicio');
+      navigation.navigate('Menu');
     } else {
       Alert.alert('Erro', 'E-mail ou senha inválida!');
     }
+  };
+
+   const handleRegister = () => {
+    navigation.navigate('Cadastro');
+  };
+
+  const handleNavigateToImage = () => {
+  const videoImage = 'https://www.google.com/';
+    Linking.openURL(videoImage)
+      .catch(() => {
+        console.log('Não foi possível abrir o link. Tente novamente mais tarde.');
+      });
   };
 
   return (
@@ -41,7 +57,7 @@ const Login = () => {
           source={{ uri: 'https://i.ibb.co/syCmR0D/Cyber-Security-265x300.png' }}
           style={styles.logo}
         />
-        <Text style={styles.boldText}>Faça seu login na plataforma</Text>
+        <Text style={styles.boldText}>Login</Text>
 
         <View style={styles.inputContainer}>
           <TextInput
@@ -70,21 +86,34 @@ const Login = () => {
         <View style={styles.bottomContainer}>
           <View style={styles.registrarContainer}>
             <Text style={styles.registrar}>Não tem uma conta?</Text>
+            <TouchableOpacity onPress={handleRegister}>
             <Text style={styles.registrarblue}>Registre-se</Text>
+            </TouchableOpacity>
           </View>
+          
         </View>
 
+      <View style={styles.google} TouchableOpacity onPress={handleNavigateToImage}>
         <Image
           source={require('./png/Sign_in_with_Google_Button-removebg-preview.png')}
           style={styles.image}
         />
+      </View>
+
         <Image source={require('./png/image.png')} style={styles.image2} />
       </View>
+
     </ImageBackground>
   );
 };
 
-const Inicio = () => {
+
+const Menu = () => {
+
+  const handleNavigateModoInfantil = () => {
+    navigation.navigate('ModoInfantil');
+  };
+
   const navigation = useNavigation();
 
   const handleNavigateLeitura = () => {
@@ -96,28 +125,49 @@ const Inicio = () => {
       source={{ uri: 'https://i.ibb.co/q1nCD2s/image.png' }}
       style={styles.backgroundImage}
     >
+
       <Image
         source={{ uri: 'https://i.ibb.co/syCmR0D/Cyber-Security-265x300.png' }}
         style={styles.logo2}
       />
-
+      
       <Text style={styles.bemvindo}>Bem vindo {'\n'}de Volta!</Text>
-      <View style={styles.container}>
+
+      <View>
         <TouchableOpacity onPress={handleNavigateLeitura}>
-          <Image
-            source={require('./png/MOBILE_PROJETO___1_-removebg-preview.png')}
-            style={styles.atividades}
+          <Image style={styles.atividades1}
+            source={require('./png/video.png')}
           />
-        </TouchableOpacity>
+          </TouchableOpacity>
+
+          <Image style={styles.atividades2}
+            source={require('./png/ferramentas.png')}
+          />
+        <TouchableOpacity onPress={handleNavigateModoInfantil}>
+          <Image  style={styles.atividades3}
+            source={require('./png/infantil.png')}
+          />
+                </TouchableOpacity>
+          <Image style={styles.atividades4}
+            source={require('./png/ajuda.png')}
+          />
 
         <Text style={styles.textotela2}>Quer ter acesso a nossos recursos exclusivos em primeira mão? Clique aqui</Text>
       </View>
     </ImageBackground>
   );
 };
-
 const Leitura = () => {
+	const handleNavigateToVideo = () => {
+    const videoURL = 'https://www.youtube.com/watch?v=DuoCd7UEkpc';
+    Linking.openURL(videoURL)
+      .catch(() => {
+        console.log('Failed to open the YouTube video');
+      });
+  };
+
   return (
+    
     <ImageBackground
       source={{ uri: 'https://i.ibb.co/q1nCD2s/image.png' }}
       style={styles.backgroundImage}>
@@ -126,10 +176,13 @@ const Leitura = () => {
         source={{ uri: 'https://i.ibb.co/syCmR0D/Cyber-Security-265x300.png' }}
         style={styles.logo3}
       />
+      <TouchableOpacity onPress={handleNavigateToVideo}>
       <Image
-        source={require('./png/MOBILE_PROJETO___2_-removebg-preview.png')}
-        style={styles.felps}
+        source={require('./png/felps.png')} 
+        style={styles.felps} 
       />
+      </TouchableOpacity>
+      
       <Text style={styles.textocomentarios}>Fundamentos da {'\n'}
       Cibersegurança #001
       </Text>
@@ -147,36 +200,253 @@ const Leitura = () => {
         style= {styles.comentarios2}
       />
       </View>
-
-      <View styles={styles.playbutton}>
-      <Image
-        source={require('./png/play-icon-play-button-with-transparent-background-free-png.png')}
-        style= {styles.playbutton}
-      />
-      </View>
-
     </View>
     </ImageBackground>
   );
 };
 
+const Cadastro = () => {
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleRegister = () => {
+    console.log('Nome:', name);
+    console.log('E-mail:', email);
+    console.log('Senha:', password);
+    if (name === '' & email === '' & password === ''){
+    Alert.alert('Oops... Algo está faltando =(');
+  } else {
+    Alert.alert('Cadastro concluído com sucesso.');
+    navigation.navigate('Menu'); 
+
+  }
+  
+};
+
+  const [gender, setGender] = useState('');
+
+  const handleSelectMasculino = () => {
+  setGender('Masculino');
+};
+
+  const handleSelectFeminino = () => {
+  setGender('Feminino');
+};
+
+  const handleSelectOutro = () => {
+  setGender('Outro');
+};
+
+const navigation = useNavigation();
+
+  return (
+
+    <ImageBackground
+      source={{ uri: 'https://i.ibb.co/q1nCD2s/image.png' }}
+      style={styles.backgroundImage}>
+    <View style={styles.container}>
+      <Text style={styles.boldText}>Cadastro</Text>
+
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Nome"
+          placeholderTextColor="#ADADAD"
+          value={name}
+          onChangeText={setName}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="E-mail"
+          placeholderTextColor="#ADADAD"
+          value={email}
+          onChangeText={setEmail}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Senha"
+          placeholderTextColor="#ADADAD"
+          secureTextEntry
+          value={password}
+          onChangeText={setPassword}
+        />
+      </View>
+
+        <Text style={styles.textogenero}>Gênero</Text>
+       <View style={styles.buttonContainer}>
+        <TouchableOpacity
+    style={[styles.genderButton, gender === 'Masculino' && styles.selectedGenderButton]}
+    onPress={handleSelectMasculino}
+  >
+    <Text style={styles.buttonText}>Masculino</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+    style={[styles.genderButton, gender === 'Feminino' && styles.selectedGenderButton]}
+    onPress={handleSelectFeminino}
+  >
+    <Text style={styles.buttonText}>Feminino</Text>
+       </TouchableOpacity>
+       <TouchableOpacity
+    style={[styles.genderButton, gender === 'Outro' && styles.selectedGenderButton]}
+    onPress={handleSelectOutro}
+  >
+      <Text style={styles.buttonText}>Outro</Text>
+       </TouchableOpacity>
+      </View>
+      <Text style={styles.selectedGenderText}>Gênero selecionado: {gender}</Text>
+      
+
+      <TouchableOpacity style={styles.buttonCadastro} onPress={handleRegister}>
+        <Text style={styles.buttonText}>Registrar</Text>
+      </TouchableOpacity>
+
+    </View>
+      </ImageBackground>  
+
+  );
+};
+
+const ModoInfantil = ({ navigation }) => {
+  navigation.navigate('ModoInfantil');
+
+  return (
+    <ImageBackground
+      source={{ uri: 'https://i.ibb.co/d4Njymg/infantilbackground.png' }}
+      style={styles.infantilbackground}
+    >
+    <View style={styles.logo4}>
+    <Image
+          source={require('./png/logoinfantil.png')}
+          style={styles.logo4}/>
+    </View>
+    <View style={styles.textInfantil}>
+    <Text style={styles.textInfantil}>Área infantil</Text>
+    </View>
+    <Image
+          source={require('./png/atividadesinfantil.png')}
+          style={styles.atividadesinfantil}/>
+
+      <TouchableOpacity onPress={() => navigation.navigate('Menu')}>  
+    <Image
+          source={require('./png/home.png')}
+          style={styles.home}/>
+      </TouchableOpacity>
+    </ImageBackground>
+  
+  )
+};
+
 const styles = StyleSheet.create({
 
-  playbutton: {
-    width: 200,
-    height: 150,
-    marginTop: -540,
-    marginLeft: -10,
-    tintColor: 'white',
-    alignItems: 'center',
+    atividades1: {
+      width: 350,
+      height: 200,
+      flexDirection: 'row',
+      paddingBottom: 10,
+      marginTop: -20,
+      marginBottom: -80,
+      alignItems: 'center',
+      alignSelf: 'center',
+    },
+
+    atividades2: {
+      width: 350,
+      height: 200,
+      paddingBottom: 10,
+      marginBottom: -80,
+      flexDirection: 'row',
+      alignItems: 'center',
+      alignSelf: 'center',
+    },
+
+    atividades3: {
+      width: 350,
+      height: 200,
+      flexDirection: 'row',
+      paddingBottom: 10,
+      marginBottom: -80,
+      alignItems: 'center',
+      alignSelf: 'center',
+    },
+
+    atividades4: {
+      width: 350,
+      height: 200,
+      paddingBottom: 10,
+      marginBottom: 280,
+      flexDirection: 'row',
+      alignItems: 'center',
+      alignSelf: 'center',
+
+    },
+
+  textInfantil: {
+    fontSize: 50,
+    fontFamily: 'ubuntu',
+    color: 'white',
+    flexDirection: 'row',
+    marginTop: 50,
     alignSelf: 'center',
+
+  },
+
+  infantilbackground: {
+    flex: 1,
+    resizeMode: 'cover',
+    justifyContent: 'center',
+  },
+
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 10,
+  },
+
+  genderButton: {
+    backgroundColor: '#E0E0E0',
+    borderRadius: 10,
+    padding: 10,
+    flex: 1,
+    marginRight: 5,
+  },
+
+  selectedGenderButton: {
+    backgroundColor: '#64B5F6',
+  },
+
+  selectedGenderText: {
+    textDecorationColor: 'white',
+    color: 'white',
+    fontSize: 16,
+    marginTop: 10,
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+
+  textogenero: {
+    fontFamily: 'UbuntuMedium',
+    color: 'white',
+    fontSize: 30,
+    marginBottom: 7,
+    marginLeft: 3,
+    marginRight: 60,
+  },
+
+  buttonCadastro: {
+    backgroundColor: '#4287f5',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 40,
+    marginTop: 40,
   },
 
   felps: {
     width: 380,
     height: 180,
     marginTop: 20,
-    marginLeft: 0,
+    marginLeft: -10,
   },
 
   textocomentarios: {
@@ -220,24 +490,20 @@ const styles = StyleSheet.create({
   textAlign: 'center',
   },
 
-  atividades: {
-    width: 420,
-    height: 400,
-    marginLeft: 80,
-    marginTop: 30,
-    tintColor: 'white',
-    alignItems: 'center',
+  logo: {
+    width: 150,
+    height: 150,
     alignSelf: 'center',
-    
+    marginBottom: 30,
   },
 
   logo2: {
     width: 80,
     height: 110,
-    marginBottom: 30,
     marginRight: 0,
     marginLeft: 30,
-    marginTop: 20,
+    marginTop: 320,
+    flexDirection: 'row',
 
   },
 
@@ -248,8 +514,36 @@ const styles = StyleSheet.create({
     marginRight: 0,
     marginLeft: 30,
     marginTop: -30,
-
   },
+
+  logo4: {
+    width: 230,
+    height: 250,
+    alignSelf: 'center',
+    marginTop: 120,
+    flexDirection: 'row'
+  },
+
+  atividadesinfantil: {
+    width: 420,
+    height: 310,
+    marginBottom: 300,
+    marginTop: -20,
+    marginLeft: 30,
+    flexDirection: 'row',
+    alignItems: 'center',
+   },
+
+    home: {
+    width: 60,
+    height: 60,
+    flexDirection: 'row',
+    marginTop: -300,
+    marginBottom: 200,
+    alignItems: 'center',
+    alignSelf: 'center',
+ 
+    },
 
   bemvindo: {
     fontFamily: 'UbuntuMedium',
@@ -258,8 +552,9 @@ const styles = StyleSheet.create({
     fontSize: 35,
     marginRight: 0,
     marginLeft: 30,
-    marginTop: -20,
-    marginBottom: 30,
+    marginTop: 0,
+    flexDirection: 'row',
+
 
   },
 
@@ -276,20 +571,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  logo: {
-    width: 150,
-    height: 150,
-    alignSelf: 'center',
-    marginBottom: 30,
-  },
-
   boldText: {
     fontFamily: 'UbuntuMedium',
-    fontWeight: 'bold',
     color: 'white',
-    fontSize: 35,
-    alignSelf: 'center',
-    marginBottom: 30,
+    fontSize: 50,
+    marginBottom: 20,
+    marginLeft: 5,
     marginRight: 60,
   },
 
@@ -375,4 +662,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-
