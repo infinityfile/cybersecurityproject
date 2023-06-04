@@ -29,7 +29,7 @@ const Login = () => {
   const navigation = useNavigation();
 
   const handleLogin = () => {
-    if (username === 'Admin' && password === 'admin') {
+    if (username === 'User@gmail.com' && password === 'admin') {
       Alert.alert('Login efetuado com sucesso');
       navigation.navigate('Menu');
     } else {
@@ -251,9 +251,14 @@ const navigation = useNavigation();
     <ImageBackground
       source={{ uri: 'https://i.ibb.co/q1nCD2s/image.png' }}
       style={styles.backgroundImage}>
+      
     <View style={styles.container}>
-      <Text style={styles.boldText}>Cadastro</Text>
+      <Image
+        source={{ uri: 'https://i.ibb.co/syCmR0D/Cyber-Security-265x300.png' }}
+        style={styles.logo5}
+      />  
 
+      <Text style={styles.cadastrotext}>Cadastro</Text>
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
@@ -377,6 +382,14 @@ const ferramentas = () => {
 
 const styles = StyleSheet.create({
 
+    cadastrotext: {
+      fontFamily: 'UbuntuMedium',
+      color: 'white',
+      fontSize: 50,
+      alignSelf: 'center',
+      marginBottom: 25,
+    },
+
     atividades1: {
       width: 350,
       height: 200,
@@ -456,8 +469,9 @@ const styles = StyleSheet.create({
   selectedGenderText: {
     textDecorationColor: 'white',
     color: 'white',
-    fontSize: 16,
-    marginTop: 15,
+    fontSize: 18,
+    marginTop: 20,
+    marginBottom: -10,
     textAlign: 'center',
     fontWeight: 'bold',
   },
@@ -466,7 +480,7 @@ const styles = StyleSheet.create({
     fontFamily: 'UbuntuMedium',
     color: 'white',
     fontSize: 30,
-    marginTop: 15,
+    marginTop: 10,
     marginBottom: 7,
     marginLeft: 3,
     marginRight: 60,
@@ -560,6 +574,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     marginTop: 120,
     flexDirection: 'row'
+  },
+
+  logo5: {
+    width: 125,
+    height: 125,
+    alignSelf: 'center',
+    marginBottom: 10,
+    marginTop: 80,
   },
 
   atividadesinfantil: {
