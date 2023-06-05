@@ -41,8 +41,8 @@ const Login = () => {
     navigation.navigate('Cadastro');
   };
 
-  const handleNavigateTorickroll = () => {
-    const videoURL = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstleyc';
+  const handleNavigateTogoogle = () => {
+    const videoURL = 'https://accounts.google.com/signup/v2/webcreateaccount?biz=false&cc=BR&continue=https%3A%2F%2Fmail.google.com&dsh=S-284732814%3A1686001236130203&flowEntry=SignUp&flowName=GlifWebSignIn&hl=en&service=mail&authuser=0';
     Linking.openURL(videoURL)
       .catch(() => {
         console.log('Falha ao tentar carregar o vídeo');
@@ -94,7 +94,7 @@ const Login = () => {
           </View>
           
         </View>
-        <TouchableOpacity onPress={handleNavigateTorickroll}>
+        <TouchableOpacity onPress={handleNavigateTogoogle}>
         <Image
           source={require('./png/Sign_in_with_Google_Button-removebg-preview.png')}
           style={styles.image}
@@ -164,8 +164,8 @@ const Menu = () => {
 
 const Leitura = () => {
 	const handleNavigateToVideo = () => {
-    const videoURL = 'https://www.youtube.com/watch?v=DuoCd7UEkpc';
-    Linking.openURL(videoURL)
+    const google = 'https://www.youtube.com/watch?v=DuoCd7UEkpc';
+    Linking.openURL(google)
       .catch(() => {
         console.log('Failed to open the YouTube video');
       });
