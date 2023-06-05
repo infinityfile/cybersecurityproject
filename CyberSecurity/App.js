@@ -42,8 +42,8 @@ const Login = () => {
   };
 
   const handleNavigateTogoogle = () => {
-    const videoURL = 'https://accounts.google.com/signup/v2/webcreateaccount?biz=false&cc=BR&continue=https%3A%2F%2Fmail.google.com&dsh=S-284732814%3A1686001236130203&flowEntry=SignUp&flowName=GlifWebSignIn&hl=en&service=mail&authuser=0';
-    Linking.openURL(videoURL)
+    const google = 'https://accounts.google.com/signup/v2/webcreateaccount?biz=false&cc=BR&continue=https%3A%2F%2Fmail.google.com&dsh=S-284732814%3A1686001236130203&flowEntry=SignUp&flowName=GlifWebSignIn&hl=en&service=mail&authuser=0';
+    Linking.openURL(google)
       .catch(() => {
         console.log('Falha ao tentar carregar o vídeo');
       });
